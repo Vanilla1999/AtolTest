@@ -5,28 +5,28 @@ import android.os.Bundle
 import android.util.Log
 
 class MainActivity : AppCompatActivity() {
-    lateinit var atol: Atol
+    lateinit var chainWay: ChainWay
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        atol = Atol(this) { barcode ->
+        chainWay = ChainWay(this) { barcode ->
             Log.d("barcode", barcode)
         }
-        atol.init()
+        chainWay.init()
     }
 
     override fun onPause() {
         super.onPause()
-        atol.pause()
+        chainWay.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        atol.prepare()
+        chainWay.prepare()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        atol.release()
+        chainWay.release()
     }
 }
