@@ -7,9 +7,46 @@ import android.os.Bundle
 
 class ChainWay(private val mContext: Context, private val callBack: (String) -> Unit) {
 
+    private fun initMain() {
+        // 主参数设置 main parameter setting
+        // 主参数设置 main parameter setting
+        val bMain = Bundle()
+        bMain.putString("PROFILE_NAME", "NewProfile") // 配置文件名
 
+        bMain.putString("PROFILE_ENABLED", "true") // 启用该配置文件
+
+        bMain.putString("CONFIG_MODE", "CREATE_IF_NOT_EXIST") // 如果配置文件不存在则创建
+
+
+// 设置关联应用程序/Set the associated application
+
+// 设置关联应用程序/Set the associated application
+        val bundleApp1 = Bundle()
+        bundleApp1.putString(
+            "PACKAGE_NAME",
+            "com.example.atoltest"
+        ) // 关联应用程序的包名/associated application package names
+
+        bundleApp1.putStringArray(
+            "ACTIVITY_LIST",
+            arrayOf("com.example.atoltest.MainActivity")
+        ) // 关联的 Activity 列表
+
+
+        bMain.putParcelableArray(
+            "APP_LIST", arrayOf(
+                bundleApp1,
+            )
+        )
+
+        val i = Intent()
+        i.setAction("com.symbol.infowedge.api.ACTION")
+        i.putExtra("com.symbol.infowedge.api.SET_CONFIG", bMain)
+        mContext.sendBroadcast(i)
+    }
 
     fun init() {
+        initMain();
         val bMain = Bundle()
         bMain.putString("PROFILE_NAME", "NewProfile") // 配置文件名/profile name
         bMain.putString("PROFILE_ENABLED", "true") // 启用该配置文件/enable this profile
@@ -39,7 +76,7 @@ class ChainWay(private val mContext: Context, private val callBack: (String) -> 
             "false"
         ) // 扫码成功时是否震动提示/whether to vibrate when scanning successfully
         bParams.putString("decoder_code11", "true") // 启用 Code11 条码/eable code 11
-        bParams.putString("decoder_code128", "true") // 禁用 Code128 条码/eable code 128
+        bParams.putString("decoder_code128", "false") // 禁用 Code128 条码/eable code 128
 
         bConfig.putBundle("PARAM_LIST", bParams)
         bMain.putBundle("PLUGIN_CONFIG", bConfig)
