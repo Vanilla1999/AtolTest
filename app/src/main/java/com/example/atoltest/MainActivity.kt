@@ -5,28 +5,28 @@ import android.os.Bundle
 import android.util.Log
 
 class MainActivity : AppCompatActivity() {
-    lateinit var atol: Atol
+    lateinit var honeywell: Honeywell
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        atol = Atol(this) { barcode ->
+        honeywell = Honeywell(this) { barcode ->
             Log.d("barcode", barcode)
         }
-        atol.init()
+        honeywell.init()
     }
 
     override fun onPause() {
         super.onPause()
-        atol.pause()
+        honeywell.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        atol.prepare()
+        honeywell.prepare()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        atol.release()
+        honeywell.release()
     }
 }
