@@ -47,6 +47,8 @@ class ChainWay(private val mContext: Context, private val callBack: (String) -> 
 
     fun init() {
         initMain();
+        Thread.sleep(1_000)
+        println("заиничил, идём дальше");
         val bMain = Bundle()
         bMain.putString("PROFILE_NAME", "NewProfile") // 配置文件名/profile name
         bMain.putString("PROFILE_ENABLED", "true") // 启用该配置文件/enable this profile
@@ -55,31 +57,63 @@ class ChainWay(private val mContext: Context, private val callBack: (String) -> 
             "UPDATE"
         ) // 将配置合并到已有的配置文件/Merge the configuration into an existing profile
 
-        val bConfig = Bundle()
-        bConfig.putString("PLUGIN_NAME", "BARCODE") // 设置类型：扫码头/type:scanner
-        bConfig.putString("RESET_CONFIG", "true") // 重置原有扫码头配置/reset to previous settings
 
-        val bParams = Bundle()
-        bParams.putString("barcode_enabled", "true") // 是否启用扫码头/enable or disable scanner
-        bParams.putString(
+
+        val bBarcodeConfig = Bundle()
+        bBarcodeConfig.putString("PLUGIN_NAME", "BARCODE") // 设置类型：扫码头/type:scanner
+        bBarcodeConfig.putString("RESET_CONFIG", "true") // 重置原有扫码头配置/reset to previous settings
+
+        val bBarcodeParams = Bundle()
+        bBarcodeParams.putString("barcode_enabled", "true") // 是否启用扫码头/enable or disable scanner
+        bBarcodeParams.putString(
             "barcode_trigger_mode",
-            "0"
+            "2"
         )
-        bParams.putString(
+        bBarcodeParams.putString(
             "charset_name",
             "Auto"
         ) // 解码使用的数据集/：Auto，UTF-8，GBK，GB18030，ISO-8859-1，Shift_JIS
-        bParams.putString("success_audio", "true") // 扫码成功时播放提示音/ success sound
-        bParams.putString("failure_audio", "false") // 扫码失败时播放提示音 /failure sound
-        bParams.putString(
+        bBarcodeParams.putString("success_audio", "false") // 扫码成功时播放提示音/ success sound
+        bBarcodeParams.putString("failure_audio", "false") // 扫码失败时播放提示音 /failure sound
+        bBarcodeParams.putString(
             "vibrate",
             "false"
         ) // 扫码成功时是否震动提示/whether to vibrate when scanning successfully
-        bParams.putString("decoder_code11", "true") // 启用 Code11 条码/eable code 11
-        bParams.putString("decoder_code128", "false") // 禁用 Code128 条码/eable code 128
+        bBarcodeParams.putString("decoder_code11", "true") // 启用 Code11 条码/eable code 11
+        bBarcodeParams.putString("decoder_code128", "true") // 禁用 Code128 条码/eable code 128
+        bBarcodeParams.putString("decoder_upca", "true") // 启用 Code11 条码/eable code 11
+        bBarcodeParams.putString("decoder_upca", "true")
+        bBarcodeParams.putString("decoder_rss", "false") // 禁用 Code128 条码/eable code 128
+        bBarcodeParams.putString("decoder_ean13", "true")
+        bBarcodeParams.putString("decoder ean13 report check digit","false")
+        bBarcodeParams.putString("decoder_ean13_digit5", "true")
+        bBarcodeParams.putString("barcode_trigger_mode", "2")
+        bBarcodeConfig.putBundle("PARAM_LIST", bBarcodeParams)
 
-        bConfig.putBundle("PARAM_LIST", bParams)
-        bMain.putBundle("PLUGIN_CONFIG", bConfig)
+
+
+
+        val bIntentConfig = Bundle()
+        bIntentConfig.putString("PLUGIN_NAME", "INTENT") // 设置类型：INTENT
+        bIntentConfig.putString("RESET_CONFIG", "true") // 重置原有广播输出配置/reset to intent config
+        val bIntentParams = Bundle()
+        bIntentParams.putString("intent_output_enabled", "true") // 是否启用广播输出/whether enable intent output
+        bIntentParams.putString("intent_action", "com.infowedge.data");   // 设置广播输出的 action/ set intent action
+        bIntentParams.putString("intent_data", "data_string");   // 设置广播输出的数据名称/set intent output data name
+        bIntentConfig.putBundle("PARAM_LIST", bIntentParams)
+        val bBDFConfig = Bundle()
+        bBDFConfig.putString("PLUGIN_NAME", "BDF")
+        bBDFConfig.putString("RESET_CONFIG", "true")
+        val bBDFParams = Bundle()
+        bBDFParams.putString("bdf_enabled", "true")
+        bBDFParams.putString("bdf_send_enter", "true")
+        bBDFConfig.putBundle("PARAM_LIST", bBDFParams)
+        val bundlePluginConfig: ArrayList<Bundle> = ArrayList<Bundle>()
+        bundlePluginConfig.add(bBarcodeConfig )
+        bundlePluginConfig.add(bIntentConfig)
+        bundlePluginConfig.add(bBDFConfig)
+        bMain.putParcelableArrayList("PLUGIN_CONFIG", bundlePluginConfig)
+
 
         val i = Intent()
         i.setAction("com.symbol.infowedge.api.ACTION")
