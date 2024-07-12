@@ -7,15 +7,15 @@ import android.util.Log
 import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
-    lateinit var chainWay: ChainWay
+    lateinit var meferi: Meferi
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        chainWay = ChainWay(this) { barcode ->
+        meferi = Meferi(this) { barcode ->
             Log.d("barcode", barcode)
         }
-        chainWay.init()
+        meferi.init()
         findViewById<EditText>(R.id.text1).setOnKeyListener { v, keyCode, event -> run {
             Log.d("keys", event.toString());
         }
@@ -25,16 +25,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        chainWay.pause()
+        meferi.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        chainWay.prepare()
+        meferi.prepare()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        chainWay.release()
+        meferi.release()
     }
 }
