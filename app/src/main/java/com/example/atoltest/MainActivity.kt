@@ -1,32 +1,38 @@
 package com.example.atoltest
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.superlead.sdk.service.BarcodeService
 
 class MainActivity : AppCompatActivity() {
-    lateinit var chainWay: Mertech
+    lateinit var mertech: Mertech
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        chainWay = Mertech(this) { barcode ->
-            Log.d("barcode", barcode)
+        startService(Intent(this, BarcodeService::class.java))
+        val barcodeView = findViewById<TextView>(R.id.barcode)
+        mertech = Mertech(this) { barcode ->
+            barcodeView.text = barcode
         }
-        chainWay.init()
+        mertech.init()
     }
 
     override fun onPause() {
         super.onPause()
-        chainWay.pause()
+        mertech.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        chainWay.prepare()
+        mertech.prepare()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        chainWay.release()
+        mertech.release()
     }
 }
