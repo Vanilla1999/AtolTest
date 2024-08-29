@@ -88,6 +88,8 @@ class ChainWay(private val mContext: Context, private val callBack: (String) -> 
         bBarcodeParams.putString("decoder ean13 report check digit","false")
         bBarcodeParams.putString("decoder_ean13_digit5", "true")
         bBarcodeParams.putString("barcode_trigger_mode", "2")
+        bBarcodeParams.putString("decoder_upca_report_check_digit", "true")
+        bBarcodeParams.putString("decoder_upca_report_us_sys_char", "false")
         bBarcodeConfig.putBundle("PARAM_LIST", bBarcodeParams)
 
 
