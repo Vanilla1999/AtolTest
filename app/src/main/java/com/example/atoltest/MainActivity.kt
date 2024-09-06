@@ -5,28 +5,28 @@ import android.os.Bundle
 import android.util.Log
 
 class MainActivity : AppCompatActivity() {
-    lateinit var atol: Atol
+    lateinit var newLand: NewLand
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        atol = Atol(this) { barcode ->
+        newLand = NewLand(this) { barcode ->
             Log.d("barcode", barcode)
         }
-        atol.init()
+        newLand.init()
     }
 
     override fun onPause() {
         super.onPause()
-        atol.pause()
+        newLand.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        atol.prepare()
+        newLand.prepare()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        atol.release()
+        newLand.release()
     }
 }
