@@ -5,28 +5,28 @@ import android.os.Bundle
 import android.util.Log
 
 class MainActivity : AppCompatActivity() {
-    lateinit var atol: Atol
+    lateinit var seuic: Seuic
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        atol = Atol(this) { barcode ->
+        seuic = Seuic(this) { barcode ->
             Log.d("barcode", barcode)
         }
-        atol.init()
+        seuic.init()
     }
 
     override fun onPause() {
         super.onPause()
-        atol.pause()
+        seuic.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        atol.prepare()
+        seuic.prepare()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        atol.release()
+        seuic.release()
     }
 }
