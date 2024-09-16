@@ -5,28 +5,28 @@ import android.os.Bundle
 import android.util.Log
 
 class MainActivity : AppCompatActivity() {
-    lateinit var atol: Atol
+    lateinit var movfast: Movfast
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        atol = Atol(this) { barcode ->
+        movfast = Movfast(this) { barcode ->
             Log.d("barcode", barcode)
         }
-        atol.init()
+        movfast.init()
     }
 
     override fun onPause() {
         super.onPause()
-        atol.pause()
+        movfast.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        atol.prepare()
+        movfast.prepare()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        atol.release()
+        movfast.release()
     }
 }
