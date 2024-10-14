@@ -3,6 +3,7 @@ package com.example.atoltest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     lateinit var seuic: Seuic
@@ -10,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         seuic = Seuic(this) { barcode ->
-            Log.d("barcode", barcode)
+            findViewById<TextView>(R.id.text).text = barcode
         }
         seuic.init()
     }
