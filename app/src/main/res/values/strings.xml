@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">AtolTest</string>
+    <!--Меню переключения подсветки сканера-->
+    <string name="text_light_on">ВКЛ</string>
+    <string name="text_light_off">ВЫКЛ</string>
+    <string name="scan_button_title">Scan</string>
+    <string name="stop_scan_button_title">stop scan</string>
+    <string name="clear_all_button_title">Clear</string>
+    <string name="remove_button_title">Remove</string>
+    <string name="main_title_placeholder">BM+SR 0123 </string>
+    <string name="sub_title_placeholder">BM+SR 0123 [BondableFunctional]</string>
+    <string name="title_activity_peripheral">Peripheral Activity</string>
+    <string name="title_activity_setting">Setting Activity</string>
+    <string name="connect_button_title">Connect</string>
+    <string name="disconnect_button_title">Disconnect</string>
+    <string name="send_button_title">Scanning</string>
+    <string name="flash_button_title">Flash Firmware</string>
+    <string name="clear_button_title">Clear</string>
+    <string name="setting_button_title">Setting>></string>
+    <string name="db_label">dB</string>
+    <string name="db_placeholder">-75</string>
+    <string name="sending_label">Sending</string>
+    <string name="receiving_label">Receiving</string>
+    <string name="empty">Нет устройств</string>
 </resources>

@@ -1,0 +1,27 @@
+<resources>
+
+    <style name="SelectableItemTheme">
+        <item name="colorControlHighlight">@color/colorWhite</item>
+    </style>
+    <style name="SelectableItemBackground">
+        <item name="android:theme">@style/SelectableItemTheme</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">#f00</item>
+        <item name="rippleColor">#a4a4a4</item>
+
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">#00f</item>
+        <item name="rippleColor">#a4a4a4</item>
+    </style>
+    <style name="Neutral" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="rippleColor">#a4a4a4</item>
+    </style>
+
+
+</resources>

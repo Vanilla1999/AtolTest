@@ -26,6 +26,9 @@ android {
             )
         }
     }
+    viewBinding {
+        android.buildFeatures.viewBinding = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -36,7 +39,6 @@ android {
 }
 
 dependencies {
-    implementation(files("libs/ru_atol_barcodeservice_api-release-1_5_35.jar"))
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.12.0")

@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorGray">#909090</color>
+    <color name="colorGrayF">#505050</color>
+    <!--Камера-->
+    <color name="backgroundCamera">#212121</color>
+    <color name="transparentWhite">#96ffffff</color>
+    <color name="textColorStrokeTextView">#ffffff</color>
+    <color name="strokeColorStrokeTextView">#000000</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#ffffff</color>
+    <!--Нажатия-->
+    <color name="grey">#cccccc</color>
+    <color name="light_blue">#ff64c2f4</color>
+    <color name="red">#DD2C00</color>
 </resources>
