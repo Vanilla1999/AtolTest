@@ -2,32 +2,31 @@ package com.example.atoltest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
-    lateinit var atol: Atol
+    lateinit var urovo: Urovo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        atol = Atol(this) { barcode ->
+        urovo = Urovo(this) { barcode ->
             findViewById<TextView>(R.id.text).text = barcode
         }
-        atol.init()
+        urovo.init()
     }
 
     override fun onPause() {
         super.onPause()
-        atol.pause()
+        urovo.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        atol.prepare()
+        urovo.prepare()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        atol.release()
+        urovo.release()
     }
 }

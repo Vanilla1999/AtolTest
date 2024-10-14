@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    implementation(files("libs/ru_atol_barcodeservice_api-release-1_5_35.jar"))
+    implementation(files("libs/platform_sdk_v4.1.0326.jar"))
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.12.0")
