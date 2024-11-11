@@ -31,6 +31,8 @@ class NewLand(private val mContext: Context, private val callBack: (String) -> U
             }
         }
         mContext?.registerReceiver(mNewLandReceiver, mNewLandScannderFilter)
+        val intent = Intent("nlscan.action.SCANNER_TRIG")
+        mContext.sendBroadcast(intent)
     }
 
     fun prepare() {
