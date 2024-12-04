@@ -15,46 +15,11 @@ class NewLand(private val mContext: Context, private val callBack: (String) -> U
     var mNewLandReceiver: BroadcastReceiver? = null
     private var mNewLandIsScaning = false
     var mNewLandScannderFilter = IntentFilter("nlscan.action.SCANNER_RESULT")
-    var iBackupRecovery: IBackupRecovery? = null
-    var connectionToBackupConnection: ServiceConnection = object : ServiceConnection {
-        override fun onServiceDisconnected(arg0: ComponentName) {
-            iBackupRecovery = null
-        }
-
-        override fun onServiceConnected(arg0: ComponentName, arg1: IBinder) {
-            iBackupRecovery = IBackupRecovery.Stub.asInterface(arg1)
-            val settings = """{
-    "scan_setting": [
-        {
-            "common": [
-                {
-                    "BROADCAST_OUTPUT_SETTINGS.ACTION": "nlscan.action.SCANNER_RESULT",
-                    "BROADCAST_OUTPUT_SETTINGS.RESULT1": "BARCODE1"
-                }
-            ],
-            "softwareEngine": [
-                {
-                    "AZTEC.Enable": "1",
-                    "AZTEC.Minlen": "1",
-                    "AZTEC.Maxlen": "3832",
-                    "AZTEC.CodeNum": "2",
-                    "AZTEC.NumFixed": "0",
-                    "AZTEC.VideoMode": "2"
-                }
-            ]
-        }
-    ]
-}"""
-
-            val result = iBackupRecovery!!.setNLSRecoverData(settings)
-            print("")
-        }
-    }
 
     fun init() {
         mNewLandReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                var barcodeStr = intent.getStringExtra("SCAN_BARCODE1")
+                var barcodeStr = intent.getStringExtra("BARCODE1")
                 if (barcodeStr!!.contains("\n")) {
                     barcodeStr = barcodeStr.replace(
                         "\n".toRegex(),
@@ -71,16 +36,16 @@ class NewLand(private val mContext: Context, private val callBack: (String) -> U
         }
         mContext?.registerReceiver(mNewLandReceiver, mNewLandScannderFilter)
 
-        val intent1 = Intent("nlscan.action.SCANNER_TRIG")
-        mContext.sendBroadcast(intent1)
-        val intent = Intent()
-        intent.setComponent(
-            ComponentName(
-                "com.nlscan.nlsbackuprecovery",
-                "com.nlscan.nlsbackuprecovery.service.BackupRecoveryService"
-            )
-        )
-        mContext.bindService(intent, connectionToBackupConnection, Context.BIND_AUTO_CREATE)
+        val intent = Intent("ACTION_BARCODE_CFG")
+        intent.putExtra("CODE_ID", "QR")
+        intent.putExtra("PROPERTY", "Enable")
+        intent.putExtra("VALUE", "1")
+        mContext?.sendBroadcast(intent);
+        val intent1 = Intent("ACTION_BARCODE_CFG")
+        intent1.putExtra("CODE_ID", "CODE128")
+        intent1.putExtra("PROPERTY", "Enable")
+        intent1.putExtra("VALUE", "0")
+        mContext?.sendBroadcast(intent);
     }
 
 
